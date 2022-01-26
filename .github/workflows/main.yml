@@ -2,6 +2,7 @@ name: Push-request
 on: push
  
 jobs:
+  actions_git:
   runs-on: ubuntu-latest
   steps:
     - uses: actions/checkout@v2
@@ -21,3 +22,7 @@ jobs:
     - name: Run Test
       run: |
         make test
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
