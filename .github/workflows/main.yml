@@ -3,26 +3,26 @@ on: push
  
 jobs:
   actions_git:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js 16.x
-    uses: actions/setup-node@v2
-    with:
-      node-version: 16.x
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
 
-    - name: setup
-      run: |
-        make setup
-      env:
-      CI: true
-    - name: Run linter
-      run: |
-        make lint
-    - name: Run Test
-      run: |
-        make test
-    - name: Run Snyk to check for vulnerabilities
-      uses: snyk/actions/node@master
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: setup
+        run: |
+          make setup
+        env:
+        CI: true
+      - name: Run linter
+        run: |
+          make lint
+      - name: Run Test
+        run: |
+          make test
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
